@@ -1,0 +1,45 @@
+﻿<Window x:Class="Monetov_Hospital.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Monetov_Hospital"
+        mc:Ignorable="d"
+        Title="RegisterWindow" Height="500" Width="400">
+    <Grid Margin="20">
+        <StackPanel>
+            <TextBlock Text="Логин:"/>
+            <TextBox x:Name="txtLogin"/>
+
+            <TextBlock Text="Пароль:" Margin="0,10,0,0"/>
+            <PasswordBox x:Name="txtPassword"/>
+
+            <TextBlock Text="Имя:" Margin="0,10,0,0"/>
+            <TextBox x:Name="txtName"/>
+
+            <TextBlock Text="Фамилия:" Margin="0,10,0,0"/>
+            <TextBox x:Name="txtSurname"/>
+
+            <TextBlock Text="Отчество:" Margin="0,10,0,0"/>
+            <TextBox x:Name="txtMiddleName"/>
+
+            <TextBlock Text="Адрес:" Margin="0,10,0,0"/>
+            <TextBox x:Name="txtAddress"/>
+
+            <TextBlock Text="Город:" Margin="0,10,0,0"/>
+            <TextBox x:Name="txtTown"/>
+
+            <TextBlock Text="Пол:" Margin="0,10,0,0"/>
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <RadioButton x:Name="radioMale" Content="Мужской" Margin="0,0,10,0"/>
+                <RadioButton x:Name="radioFemale" Content="Женский"/>
+            </StackPanel>
+
+            <TextBlock Text="Возраст:" Margin="0,10,0,0"/>
+            <TextBox x:Name="txtAge"/>
+
+            <Button Content="Зарегистрироваться" Height="40" Margin="0,20,0,0"
+                    Click="RegisterUser"/>
+        </StackPanel>
+    </Grid>
+</Window>

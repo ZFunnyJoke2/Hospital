@@ -1,0 +1,46 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# VS folders
+.vs/
+
+# Others
+*.log
+*.cache
+*.pdb
+*.vsp
+*.vspscc
+*.vssscc
+
+# Temporary files
+~$*
+*.tmp
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+
+# Rider / JetBrains
+.idea/
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Visual Studio Code
+.vscode/
+
+# Publish files
+*.Publish.xml
+*.pubxml
+*.publishproj
