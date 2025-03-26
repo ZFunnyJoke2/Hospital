@@ -19,9 +19,13 @@ namespace Monetov_Hospital.Windows
     /// </summary>
     public partial class AddUserWindow : Window
     {
-        public AddUserWindow()
+        private string role;
+
+        public AddUserWindow(string role)
         {
             InitializeComponent();
+            this.role = role;
+            // можно по роли менять UI или предустановки
         }
     }
 }

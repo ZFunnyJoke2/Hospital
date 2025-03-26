@@ -11,15 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Monetov_Hospital.Windows;
+
 
 namespace Monetov_Hospital
 {
-    /// <summary>
-    /// Логика взаимодействия для AdminWindow.xaml
-    /// </summary>
     public partial class AdminWindow : Window
     {
-        Monetov_Hospital1Entities db = new Monetov_Hospital1Entities();
+        Monetov_Hospital1Entities1 db = new Monetov_Hospital1Entities1();
 
         public AdminWindow()
         {
@@ -29,20 +28,11 @@ namespace Monetov_Hospital
 
         private void LoadUsers()
         {
-            var registrars = db.registrar
-                .Select(r => new
-                {
-                    r.user_id,
-                    r.login,
-                    r.name,
-                    r.surname
-                })
-                .ToList();
-
-            var doctors = db.doctor
+            var doctors = db.worker
+                .Where(w => w.role_id == 1)
                 .Select(d => new
                 {
-                    d.user_id,
+                    d.worker_ID,
                     d.login,
                     d.name,
                     d.surname,
@@ -50,22 +40,34 @@ namespace Monetov_Hospital
                 })
                 .ToList();
 
-            registrarGrid.ItemsSource = registrars;
-            doctorGrid.ItemsSource = doctors;
-        }
+            var registrars = db.worker
+                .Where(w => w.role_id == 4)
+                .Select(r => new
+                {
+                    r.worker_ID,
+                    r.login,
+                    r.name,
+                    r.surname
+                })
+                .ToList();
 
-        private void AddRegistrar_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new AddUserWindow("Registrar");
-            window.ShowDialog();
-            LoadUsers(); // Обновить список
+            doctorGrid.ItemsSource = doctors;
+            registrarGrid.ItemsSource = registrars;
         }
 
         private void AddDoctor_Click(object sender, RoutedEventArgs e)
         {
             var window = new AddUserWindow("Doctor");
             window.ShowDialog();
-            LoadUsers(); // Обновить список
+            LoadUsers();
+        }
+
+        private void AddRegistrar_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new AddUserWindow("Registrar");
+            window.ShowDialog();
+            LoadUsers();
         }
     }
 }
+

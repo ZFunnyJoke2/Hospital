@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9f04434a194946b48cf35e62ce7586cf" Name="Diagram1">
+        <EntityTypeShape EntityType="Monetov_Hospital1Model.description_of_operation" Width="1.5" PointX="9.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Monetov_Hospital1Model.medical_history" Width="1.5" PointX="10.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Monetov_Hospital1Model.operation" Width="1.5" PointX="12" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Monetov_Hospital1Model.patient" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Monetov_Hospital1Model.patient_condition" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Monetov_Hospital1Model.permissions" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Monetov_Hospital1Model.roles" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Monetov_Hospital1Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Monetov_Hospital1Model.treatment_sheet" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Monetov_Hospital1Model.type_of_treatment" Width="1.5" PointX="8" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Monetov_Hospital1Model.users" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Monetov_Hospital1Model.worker" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="Monetov_Hospital1Model.FK_operation_description_of_operation" ManuallyRouted="false" />
+        <AssociationConnector Association="Monetov_Hospital1Model.FK_medical_history_treatment_sheet1" ManuallyRouted="false" />
+        <AssociationConnector Association="Monetov_Hospital1Model.FK_medical_history_type_of_treatment" ManuallyRouted="false" />
+        <AssociationConnector Association="Monetov_Hospital1Model.FK__patient__role_id__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="Monetov_Hospital1Model.FK_Patient_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Monetov_Hospital1Model.FK_treatment_sheet_patient_condition" ManuallyRouted="false" />
+        <AssociationConnector Association="Monetov_Hospital1Model.FK__users__role_id__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="Monetov_Hospital1Model.role_permissions" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

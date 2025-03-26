@@ -14,13 +14,6 @@ namespace Monetov_Hospital
     
     public partial class medical_history
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public medical_history()
-        {
-            this.doctor = new HashSet<doctor>();
-            this.patient = new HashSet<patient>();
-        }
-    
         public int medical_history_ID { get; set; }
         public string diagnosis { get; set; }
         public System.DateTime date_of_the_disease { get; set; }
@@ -29,11 +22,7 @@ namespace Monetov_Hospital
         public int type_of_treatment_ID { get; set; }
         public int treatment_sheet_ID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<doctor> doctor { get; set; }
         public virtual treatment_sheet treatment_sheet { get; set; }
         public virtual type_of_treatment type_of_treatment { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<patient> patient { get; set; }
     }
 }

@@ -17,7 +17,6 @@ namespace Monetov_Hospital
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public roles()
         {
-            this.doctor = new HashSet<doctor>();
             this.patient = new HashSet<patient>();
             this.users = new HashSet<users>();
             this.permissions1 = new HashSet<permissions>();
@@ -27,8 +26,6 @@ namespace Monetov_Hospital
         public string role_name { get; set; }
         public string permissions { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<doctor> doctor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<patient> patient { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

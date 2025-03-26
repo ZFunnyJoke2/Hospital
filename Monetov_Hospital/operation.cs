@@ -14,22 +14,11 @@ namespace Monetov_Hospital
     
     public partial class operation
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public operation()
-        {
-            this.doctor = new HashSet<doctor>();
-            this.patient = new HashSet<patient>();
-        }
-    
         public int operation_ID { get; set; }
         public System.DateTime date_of_operation { get; set; }
         public bool result { get; set; }
         public int description_of_operation_ID { get; set; }
     
         public virtual description_of_operation description_of_operation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<doctor> doctor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<patient> patient { get; set; }
     }
 }

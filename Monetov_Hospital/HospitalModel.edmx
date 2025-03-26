@@ -12,26 +12,6 @@
           <Property Name="description_of_operation_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description_of_operation" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="doctor">
-          <Key>
-            <PropertyRef Name="doctor_ID" />
-          </Key>
-          <Property Name="doctor_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="middle_name" Type="nvarchar" MaxLength="50" />
-          <Property Name="age" Type="int" Nullable="false" />
-          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="scientific_title" Type="nvarchar" MaxLength="50" />
-          <Property Name="experience" Type="decimal" Precision="3" Scale="1" />
-          <Property Name="post" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="operation_ID" Type="int" Nullable="false" />
-          <Property Name="medical_history_ID" Type="int" Nullable="false" />
-          <Property Name="role_id" Type="int" />
-          <Property Name="login" Type="nchar" MaxLength="10" />
-          <Property Name="password" Type="nchar" MaxLength="10" />
-          <Property Name="user_id" Type="int" />
-        </EntityType>
         <EntityType Name="medical_history">
           <Key>
             <PropertyRef Name="medical_history_ID" />
@@ -65,8 +45,8 @@
           <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="gender" Type="bit" Nullable="false" />
           <Property Name="town" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="operation_ID" Type="int" Nullable="false" />
-          <Property Name="medical_history_ID" Type="int" Nullable="false" />
+          <Property Name="operation_ID" Type="int" />
+          <Property Name="medical_history_ID" Type="int" />
           <Property Name="role_id" Type="int" />
           <Property Name="login" Type="nchar" MaxLength="10" />
           <Property Name="password" Type="nchar" MaxLength="10" />
@@ -139,18 +119,23 @@
           <Property Name="password_hash" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="role_id" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__doctor__role_id__5165187F">
-          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
-          <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="roles">
-              <PropertyRef Name="role_id" />
-            </Principal>
-            <Dependent Role="doctor">
-              <PropertyRef Name="role_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="worker">
+          <Key>
+            <PropertyRef Name="worker_ID" />
+          </Key>
+          <Property Name="worker_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="middle_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="age" Type="int" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="post" Type="nvarchar" MaxLength="50" />
+          <Property Name="experience" Type="decimal" Precision="3" Scale="1" />
+          <Property Name="role_id" Type="int" />
+          <Property Name="login" Type="nchar" MaxLength="10" />
+          <Property Name="password" Type="nchar" MaxLength="10" />
+          <Property Name="user_id" Type="int" />
+        </EntityType>
         <Association Name="FK__patient__role_id__571DF1D5">
           <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
           <End Role="patient" Type="Self.patient" Multiplicity="*" />
@@ -199,42 +184,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_doctor_medical_history">
-          <End Role="medical_history" Type="Self.medical_history" Multiplicity="1" />
-          <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="medical_history">
-              <PropertyRef Name="medical_history_ID" />
-            </Principal>
-            <Dependent Role="doctor">
-              <PropertyRef Name="medical_history_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_doctor_operation">
-          <End Role="operation" Type="Self.operation" Multiplicity="1" />
-          <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="operation">
-              <PropertyRef Name="operation_ID" />
-            </Principal>
-            <Dependent Role="doctor">
-              <PropertyRef Name="operation_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Doctor_User">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
-          <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="users">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="doctor">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_medical_history_treatment_sheet1">
           <End Role="treatment_sheet" Type="Self.treatment_sheet" Multiplicity="1" />
           <End Role="medical_history" Type="Self.medical_history" Multiplicity="*" />
@@ -271,30 +220,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_patient_medical_history">
-          <End Role="medical_history" Type="Self.medical_history" Multiplicity="1" />
-          <End Role="patient" Type="Self.patient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="medical_history">
-              <PropertyRef Name="medical_history_ID" />
-            </Principal>
-            <Dependent Role="patient">
-              <PropertyRef Name="medical_history_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_patient_operation">
-          <End Role="operation" Type="Self.operation" Multiplicity="1" />
-          <End Role="patient" Type="Self.patient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="operation">
-              <PropertyRef Name="operation_ID" />
-            </Principal>
-            <Dependent Role="patient">
-              <PropertyRef Name="operation_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Patient_User">
           <End Role="users" Type="Self.users" Multiplicity="0..1" />
           <End Role="patient" Type="Self.patient" Multiplicity="*" />
@@ -319,40 +244,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Хранилище Monetov_Hospital1ModelContainer">
           <EntitySet Name="description_of_operation" EntityType="Self.description_of_operation" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="doctor" EntityType="Self.doctor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="medical_history" EntityType="Self.medical_history" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="operation" EntityType="Self.operation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="patient" EntityType="Self.patient" Schema="dbo" store:Type="Tables" />
@@ -364,10 +257,7 @@
           <EntitySet Name="treatment_sheet" EntityType="Self.treatment_sheet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="type_of_treatment" EntityType="Self.type_of_treatment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__doctor__role_id__5165187F" Association="Self.FK__doctor__role_id__5165187F">
-            <End Role="roles" EntitySet="roles" />
-            <End Role="doctor" EntitySet="doctor" />
-          </AssociationSet>
+          <EntitySet Name="worker" EntityType="Self.worker" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__patient__role_id__571DF1D5" Association="Self.FK__patient__role_id__571DF1D5">
             <End Role="roles" EntitySet="roles" />
             <End Role="patient" EntitySet="patient" />
@@ -384,18 +274,6 @@
             <End Role="roles" EntitySet="roles" />
             <End Role="users" EntitySet="users" />
           </AssociationSet>
-          <AssociationSet Name="FK_doctor_medical_history" Association="Self.FK_doctor_medical_history">
-            <End Role="medical_history" EntitySet="medical_history" />
-            <End Role="doctor" EntitySet="doctor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_doctor_operation" Association="Self.FK_doctor_operation">
-            <End Role="operation" EntitySet="operation" />
-            <End Role="doctor" EntitySet="doctor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Doctor_User" Association="Self.FK_Doctor_User">
-            <End Role="users" EntitySet="users" />
-            <End Role="doctor" EntitySet="doctor" />
-          </AssociationSet>
           <AssociationSet Name="FK_medical_history_treatment_sheet1" Association="Self.FK_medical_history_treatment_sheet1">
             <End Role="treatment_sheet" EntitySet="treatment_sheet" />
             <End Role="medical_history" EntitySet="medical_history" />
@@ -407,14 +285,6 @@
           <AssociationSet Name="FK_operation_description_of_operation" Association="Self.FK_operation_description_of_operation">
             <End Role="description_of_operation" EntitySet="description_of_operation" />
             <End Role="operation" EntitySet="operation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_patient_medical_history" Association="Self.FK_patient_medical_history">
-            <End Role="medical_history" EntitySet="medical_history" />
-            <End Role="patient" EntitySet="patient" />
-          </AssociationSet>
-          <AssociationSet Name="FK_patient_operation" Association="Self.FK_patient_operation">
-            <End Role="operation" EntitySet="operation" />
-            <End Role="patient" EntitySet="patient" />
           </AssociationSet>
           <AssociationSet Name="FK_Patient_User" Association="Self.FK_Patient_User">
             <End Role="users" EntitySet="users" />
@@ -438,30 +308,6 @@
           <Property Name="description_of_operation1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="operation" Relationship="Self.FK_operation_description_of_operation" FromRole="description_of_operation" ToRole="operation" />
         </EntityType>
-        <EntityType Name="doctor">
-          <Key>
-            <PropertyRef Name="doctor_ID" />
-          </Key>
-          <Property Name="doctor_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="age" Type="Int32" Nullable="false" />
-          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="scientific_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="experience" Type="Decimal" Precision="3" Scale="1" />
-          <Property Name="post" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="operation_ID" Type="Int32" Nullable="false" />
-          <Property Name="medical_history_ID" Type="Int32" Nullable="false" />
-          <Property Name="role_id" Type="Int32" />
-          <Property Name="login" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="user_id" Type="Int32" />
-          <NavigationProperty Name="roles" Relationship="Self.FK__doctor__role_id__5165187F" FromRole="doctor" ToRole="roles" />
-          <NavigationProperty Name="medical_history" Relationship="Self.FK_doctor_medical_history" FromRole="doctor" ToRole="medical_history" />
-          <NavigationProperty Name="operation" Relationship="Self.FK_doctor_operation" FromRole="doctor" ToRole="operation" />
-          <NavigationProperty Name="users" Relationship="Self.FK_Doctor_User" FromRole="doctor" ToRole="users" />
-        </EntityType>
         <EntityType Name="medical_history">
           <Key>
             <PropertyRef Name="medical_history_ID" />
@@ -473,10 +319,8 @@
           <Property Name="date_of_cure" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="type_of_treatment_ID" Type="Int32" Nullable="false" />
           <Property Name="treatment_sheet_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="doctor" Relationship="Self.FK_doctor_medical_history" FromRole="medical_history" ToRole="doctor" />
           <NavigationProperty Name="treatment_sheet" Relationship="Self.FK_medical_history_treatment_sheet1" FromRole="medical_history" ToRole="treatment_sheet" />
           <NavigationProperty Name="type_of_treatment" Relationship="Self.FK_medical_history_type_of_treatment" FromRole="medical_history" ToRole="type_of_treatment" />
-          <NavigationProperty Name="patient" Relationship="Self.FK_patient_medical_history" FromRole="medical_history" ToRole="patient" />
         </EntityType>
         <EntityType Name="operation">
           <Key>
@@ -487,8 +331,6 @@
           <Property Name="result" Type="Boolean" Nullable="false" />
           <Property Name="description_of_operation_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="description_of_operation" Relationship="Self.FK_operation_description_of_operation" FromRole="operation" ToRole="description_of_operation" />
-          <NavigationProperty Name="doctor" Relationship="Self.FK_doctor_operation" FromRole="operation" ToRole="doctor" />
-          <NavigationProperty Name="patient" Relationship="Self.FK_patient_operation" FromRole="operation" ToRole="patient" />
         </EntityType>
         <EntityType Name="patient">
           <Key>
@@ -502,14 +344,12 @@
           <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="gender" Type="Boolean" Nullable="false" />
           <Property Name="town" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="operation_ID" Type="Int32" Nullable="false" />
-          <Property Name="medical_history_ID" Type="Int32" Nullable="false" />
+          <Property Name="operation_ID" Type="Int32" />
+          <Property Name="medical_history_ID" Type="Int32" />
           <Property Name="role_id" Type="Int32" />
           <Property Name="login" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="user_id" Type="Int32" />
-          <NavigationProperty Name="medical_history" Relationship="Self.FK_patient_medical_history" FromRole="patient" ToRole="medical_history" />
-          <NavigationProperty Name="operation" Relationship="Self.FK_patient_operation" FromRole="patient" ToRole="operation" />
           <NavigationProperty Name="roles" Relationship="Self.FK__patient__role_id__571DF1D5" FromRole="patient" ToRole="roles" />
           <NavigationProperty Name="users" Relationship="Self.FK_Patient_User" FromRole="patient" ToRole="users" />
         </EntityType>
@@ -536,7 +376,6 @@
           <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="permissions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="doctor" Relationship="Self.FK__doctor__role_id__5165187F" FromRole="roles" ToRole="doctor" />
           <NavigationProperty Name="patient" Relationship="Self.FK__patient__role_id__571DF1D5" FromRole="roles" ToRole="patient" />
           <NavigationProperty Name="users" Relationship="Self.FK__users__role_id__5FB337D6" FromRole="roles" ToRole="users" />
           <NavigationProperty Name="permissions1" Relationship="Self.role_permissions" FromRole="roles" ToRole="permissions" />
@@ -580,9 +419,25 @@
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password_hash" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="role_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="doctor" Relationship="Self.FK_Doctor_User" FromRole="users" ToRole="doctor" />
           <NavigationProperty Name="patient" Relationship="Self.FK_Patient_User" FromRole="users" ToRole="patient" />
           <NavigationProperty Name="roles" Relationship="Self.FK__users__role_id__5FB337D6" FromRole="users" ToRole="roles" />
+        </EntityType>
+        <EntityType Name="worker">
+          <Key>
+            <PropertyRef Name="worker_ID" />
+          </Key>
+          <Property Name="worker_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="age" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="post" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="experience" Type="Decimal" Precision="3" Scale="1" />
+          <Property Name="role_id" Type="Int32" />
+          <Property Name="login" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="user_id" Type="Int32" />
         </EntityType>
         <Association Name="FK_operation_description_of_operation">
           <End Role="description_of_operation" Type="Self.description_of_operation" Multiplicity="1" />
@@ -593,54 +448,6 @@
             </Principal>
             <Dependent Role="operation">
               <PropertyRef Name="description_of_operation_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__doctor__role_id__5165187F">
-          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
-          <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="roles">
-              <PropertyRef Name="role_id" />
-            </Principal>
-            <Dependent Role="doctor">
-              <PropertyRef Name="role_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_doctor_medical_history">
-          <End Role="medical_history" Type="Self.medical_history" Multiplicity="1" />
-          <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="medical_history">
-              <PropertyRef Name="medical_history_ID" />
-            </Principal>
-            <Dependent Role="doctor">
-              <PropertyRef Name="medical_history_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_doctor_operation">
-          <End Role="operation" Type="Self.operation" Multiplicity="1" />
-          <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="operation">
-              <PropertyRef Name="operation_ID" />
-            </Principal>
-            <Dependent Role="doctor">
-              <PropertyRef Name="operation_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Doctor_User">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
-          <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="users">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="doctor">
-              <PropertyRef Name="user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -665,30 +472,6 @@
             </Principal>
             <Dependent Role="medical_history">
               <PropertyRef Name="type_of_treatment_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_patient_medical_history">
-          <End Role="medical_history" Type="Self.medical_history" Multiplicity="1" />
-          <End Role="patient" Type="Self.patient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="medical_history">
-              <PropertyRef Name="medical_history_ID" />
-            </Principal>
-            <Dependent Role="patient">
-              <PropertyRef Name="medical_history_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_patient_operation">
-          <End Role="operation" Type="Self.operation" Multiplicity="1" />
-          <End Role="patient" Type="Self.patient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="operation">
-              <PropertyRef Name="operation_ID" />
-            </Principal>
-            <Dependent Role="patient">
-              <PropertyRef Name="operation_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -744,9 +527,8 @@
           <End Role="permissions" Type="Self.permissions" Multiplicity="*" />
           <End Role="roles" Type="Self.roles" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="Monetov_Hospital1Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Monetov_Hospital1Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="description_of_operation" EntityType="Self.description_of_operation" />
-          <EntitySet Name="doctor" EntityType="Self.doctor" />
           <EntitySet Name="medical_history" EntityType="Self.medical_history" />
           <EntitySet Name="operation" EntityType="Self.operation" />
           <EntitySet Name="patient" EntityType="Self.patient" />
@@ -757,25 +539,10 @@
           <EntitySet Name="treatment_sheet" EntityType="Self.treatment_sheet" />
           <EntitySet Name="type_of_treatment" EntityType="Self.type_of_treatment" />
           <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="worker" EntityType="Self.worker" />
           <AssociationSet Name="FK_operation_description_of_operation" Association="Self.FK_operation_description_of_operation">
             <End Role="description_of_operation" EntitySet="description_of_operation" />
             <End Role="operation" EntitySet="operation" />
-          </AssociationSet>
-          <AssociationSet Name="FK__doctor__role_id__5165187F" Association="Self.FK__doctor__role_id__5165187F">
-            <End Role="roles" EntitySet="roles" />
-            <End Role="doctor" EntitySet="doctor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_doctor_medical_history" Association="Self.FK_doctor_medical_history">
-            <End Role="medical_history" EntitySet="medical_history" />
-            <End Role="doctor" EntitySet="doctor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_doctor_operation" Association="Self.FK_doctor_operation">
-            <End Role="operation" EntitySet="operation" />
-            <End Role="doctor" EntitySet="doctor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Doctor_User" Association="Self.FK_Doctor_User">
-            <End Role="users" EntitySet="users" />
-            <End Role="doctor" EntitySet="doctor" />
           </AssociationSet>
           <AssociationSet Name="FK_medical_history_treatment_sheet1" Association="Self.FK_medical_history_treatment_sheet1">
             <End Role="treatment_sheet" EntitySet="treatment_sheet" />
@@ -784,14 +551,6 @@
           <AssociationSet Name="FK_medical_history_type_of_treatment" Association="Self.FK_medical_history_type_of_treatment">
             <End Role="type_of_treatment" EntitySet="type_of_treatment" />
             <End Role="medical_history" EntitySet="medical_history" />
-          </AssociationSet>
-          <AssociationSet Name="FK_patient_medical_history" Association="Self.FK_patient_medical_history">
-            <End Role="medical_history" EntitySet="medical_history" />
-            <End Role="patient" EntitySet="patient" />
-          </AssociationSet>
-          <AssociationSet Name="FK_patient_operation" Association="Self.FK_patient_operation">
-            <End Role="operation" EntitySet="operation" />
-            <End Role="patient" EntitySet="patient" />
           </AssociationSet>
           <AssociationSet Name="FK__patient__role_id__571DF1D5" Association="Self.FK__patient__role_id__571DF1D5">
             <End Role="roles" EntitySet="roles" />
@@ -813,80 +572,18 @@
             <End Role="permissions" EntitySet="permissions" />
             <End Role="roles" EntitySet="roles" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Monetov_Hospital1Model.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Monetov_Hospital1Model.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище Monetov_Hospital1ModelContainer" CdmEntityContainer="Monetov_Hospital1Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Monetov_Hospital1ModelContainer" CdmEntityContainer="Monetov_Hospital1Entities1">
           <EntitySetMapping Name="description_of_operation">
             <EntityTypeMapping TypeName="Monetov_Hospital1Model.description_of_operation">
               <MappingFragment StoreEntitySet="description_of_operation">
                 <ScalarProperty Name="description_of_operation_ID" ColumnName="description_of_operation_ID" />
                 <ScalarProperty Name="description_of_operation1" ColumnName="description_of_operation" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="doctor">
-            <EntityTypeMapping TypeName="Monetov_Hospital1Model.doctor">
-              <MappingFragment StoreEntitySet="doctor">
-                <ScalarProperty Name="doctor_ID" ColumnName="doctor_ID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="surname" ColumnName="surname" />
-                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
-                <ScalarProperty Name="age" ColumnName="age" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="scientific_title" ColumnName="scientific_title" />
-                <ScalarProperty Name="experience" ColumnName="experience" />
-                <ScalarProperty Name="post" ColumnName="post" />
-                <ScalarProperty Name="operation_ID" ColumnName="operation_ID" />
-                <ScalarProperty Name="medical_history_ID" ColumnName="medical_history_ID" />
-                <ScalarProperty Name="role_id" ColumnName="role_id" />
-                <ScalarProperty Name="login" ColumnName="login" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -999,6 +696,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="worker">
+            <EntityTypeMapping TypeName="Monetov_Hospital1Model.worker">
+              <MappingFragment StoreEntitySet="worker">
+                <ScalarProperty Name="worker_ID" ColumnName="worker_ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="post" ColumnName="post" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="role_permissions" TypeName="Monetov_Hospital1Model.role_permissions" StoreEntitySet="role_permissions">
             <EndProperty Name="permissions">
               <ScalarProperty Name="permission_id" ColumnName="permission_id" />
@@ -1007,30 +722,6 @@
               <ScalarProperty Name="role_id" ColumnName="role_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище Monetov_Hospital1Model.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище Monetov_Hospital1Model.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище Monetov_Hospital1Model.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище Monetov_Hospital1Model.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Monetov_Hospital1Model.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище Monetov_Hospital1Model.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Monetov_Hospital1Model.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище Monetov_Hospital1Model.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище Monetov_Hospital1Model.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

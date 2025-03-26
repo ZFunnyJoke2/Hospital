@@ -12,7 +12,7 @@ namespace Monetov_Hospital
 {
     public class DBManager
     {
-        public Monetov_Hospital1Entities db = new Monetov_Hospital1Entities();
+        public Monetov_Hospital1Entities1 db = new Monetov_Hospital1Entities1();
 
         public static int Role_id;
         public static string Login;

@@ -9,47 +9,27 @@ Title="Администратор" Height="600" Width="900">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <!-- Кнопки -->
             <RowDefinition Height="*"/>
+            <!-- Таблица докторов -->
+            <RowDefinition Height="*"/>
+            <!-- Таблица регистраторов -->
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Панель администратора" FontSize="22" FontWeight="Bold"
-                   HorizontalAlignment="Center" Margin="0,0,0,20"/>
+        <!-- Кнопки -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <Button Content="Добавить врача" Width="150" Margin="5" Click="AddDoctor_Click"/>
+            <Button Content="Добавить регистратора" Width="170" Margin="5" Click="AddRegistrar_Click"/>
+        </StackPanel>
 
-        <Grid Grid.Row="1" Margin="0,10,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <!-- Таблица докторов -->
+        <GroupBox Header="Врачи" Grid.Row="1" Margin="0,5,0,5">
+            <DataGrid x:Name="doctorGrid" AutoGenerateColumns="True" IsReadOnly="True"/>
+        </GroupBox>
 
-            <!-- Регистраторы -->
-            <StackPanel Grid.Column="0">
-                <TextBlock Text="Регистраторы" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,5"/>
-                <DataGrid x:Name="registrarGrid" AutoGenerateColumns="False" Height="400">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding user_id}" Width="50"/>
-                        <DataGridTextColumn Header="Логин" Binding="{Binding login}" Width="*"/>
-                        <DataGridTextColumn Header="Имя" Binding="{Binding name}" Width="*"/>
-                        <DataGridTextColumn Header="Фамилия" Binding="{Binding surname}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Button Content="Добавить регистратора" Margin="0,10,0,0" Click="AddRegistrar_Click"/>
-            </StackPanel>
-
-            <!-- Врачи -->
-            <StackPanel Grid.Column="2">
-                <TextBlock Text="Врачи" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,5"/>
-                <DataGrid x:Name="doctorGrid" AutoGenerateColumns="False" Height="400">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding user_id}" Width="50"/>
-                        <DataGridTextColumn Header="Логин" Binding="{Binding login}" Width="*"/>
-                        <DataGridTextColumn Header="Имя" Binding="{Binding name}" Width="*"/>
-                        <DataGridTextColumn Header="Фамилия" Binding="{Binding surname}" Width="*"/>
-                        <DataGridTextColumn Header="Специальность" Binding="{Binding post}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Button Content="Добавить врача" Margin="0,10,0,0" Click="AddDoctor_Click"/>
-            </StackPanel>
-        </Grid>
+        <!-- Таблица регистраторов -->
+        <GroupBox Header="Регистраторы" Grid.Row="2">
+            <DataGrid x:Name="registrarGrid" AutoGenerateColumns="True" IsReadOnly="True"/>
+        </GroupBox>
     </Grid>
 </Window>

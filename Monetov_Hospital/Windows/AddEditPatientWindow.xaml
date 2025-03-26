@@ -1,0 +1,50 @@
+﻿<Window x:Class="Monetov_Hospital.Windows.AddEditPatientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Monetov_Hospital.Windows"
+        mc:Ignorable="d"
+        Title="Пациент" Height="420" Width="400"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <Label Content="Имя"/>
+            <TextBox x:Name="txtName"/>
+
+            <Label Content="Фамилия"/>
+            <TextBox x:Name="txtSurname"/>
+
+            <Label Content="Отчество"/>
+            <TextBox x:Name="txtMiddleName"/>
+
+            <Label Content="Возраст"/>
+            <TextBox x:Name="txtAge"/>
+
+            <Label Content="Пол"/>
+            <ComboBox x:Name="cmbGender">
+                <ComboBoxItem Content="Мужской" />
+                <ComboBoxItem Content="Женский" />
+            </ComboBox>
+
+            <Label Content="Город"/>
+            <TextBox x:Name="txtTown"/>
+
+            <Label Content="Адрес"/>
+            <TextBox x:Name="txtAddress"/>
+
+            <Button Content="Сохранить" Margin="0,10,0,0" Height="30" Click="Save_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

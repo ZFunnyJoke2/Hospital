@@ -22,15 +22,13 @@ namespace Monetov_Hospital
         public string address { get; set; }
         public bool gender { get; set; }
         public string town { get; set; }
-        public int operation_ID { get; set; }
-        public int medical_history_ID { get; set; }
+        public Nullable<int> operation_ID { get; set; }
+        public Nullable<int> medical_history_ID { get; set; }
         public Nullable<int> role_id { get; set; }
         public string login { get; set; }
         public string password { get; set; }
         public Nullable<int> user_id { get; set; }
     
-        public virtual medical_history medical_history { get; set; }
-        public virtual operation operation { get; set; }
         public virtual roles roles { get; set; }
         public virtual users users { get; set; }
     }
